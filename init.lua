@@ -40,6 +40,8 @@ lazy.setup({
 	{'saadparwaiz1/cmp_luasnip'},
 	{'L3MON4D3/LuaSnip'},
 	{'rafamadriz/friendly-snippets'},
+	{"williamboman/mason.nvim"},
+	{"williamboman/mason-lspconfig.nvim"},
 })
 
 --------------------------PLUGIN-CONF--------------------------------
@@ -52,6 +54,9 @@ require('lualine').setup({
 		component_separators = '',
 	}
 })
+
+require('mason').setup()
+require('mason-lspconfig').setup()
 
 -- completion
 local lspconfig = require('lspconfig')
@@ -81,7 +86,7 @@ cmp.setup({
 		end
 	},
 	sources = {
-		{name = 'path'},							-- filepaths
+		{name = 'path'},				-- filepaths
 		{name = 'nvim_lsp', keyword_length = 1},	-- lang. server
 		{name = 'buffer', keyword_length = 3},		-- words in buffer
 		{name = 'luasnip', keyword_length = 2},		-- snippets
@@ -106,13 +111,13 @@ cmp.setup({
 		['<Up>'] = cmp.mapping.select_prev_item(select_opts),
 		['<Down>'] = cmp.mapping.select_next_item(select_opts),
 
-		['<C-u>'] = cmp.mapping.scroll_docs(-4)
-		['<C-d>'] = cmp.mapping.scroll_docs(4)
+		['<C-u>'] = cmp.mapping.scroll_docs(-4),
+		['<C-d>'] = cmp.mapping.scroll_docs(4),
 
-		['<C-e>'] = cmp.mapping.abort()
+		['<C-e>'] = cmp.mapping.abort(),
 
-		['<C-y>'] = cmp.mapping.confirm({select = true})
-		['<CR>'] = cmp.mapping.confirm({select = false})
+		['<C-y>'] = cmp.mapping.confirm({select = true}),
+		['<CR>'] = cmp.mapping.confirm({select = false}),
 
 		-- auricomplete with Tab (in menu goto next, if empty insert Tab, if in word trigger completion menu)
 		['Tab'] = cmp.mapping(function(fallback)
@@ -120,13 +125,20 @@ cmp.setup({
 
 			if cmp.visible() then
 				cmp.select_next_item(select_opts)
-			elseif col == 0 of vim.fn.getline('.'):sub(col, col):match('%s') then
+			elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
 				fallback()
 			else
 				cmp.complete()
 			end
 		end, {'i', 's'}),
+
+		-- select prev item in completion
+		['S-Tab'] = cmp.mapping(function (fallback)
+			if cmp.visible() then
+				cmp.select_prev_item(select_opts)
+			else
+				fallback()
+			end
+		end, {'i', 's'}),
 	}
-
 })
-
