@@ -1,3 +1,7 @@
 # My NeoVim config
 - unfinished
-- LSP and the interesting stuff missing
+- LSP added for:
+    - Lua
+    - Python
+    - Go
+    - Bash
