@@ -9,10 +9,11 @@ local luasnip = require('luasnip')
 local cmp = require('cmp')
 
 cmp.setup({
+		preselect = 'item',
 		snippet = {
-				expand = function(args)
-						require('luasnip').lsp_expend(args.body)
-				end,
+			expand = function(args)
+				luasnip.lsp_expend(args.body)
+			end,
 		},
 
 		mapping = cmp.mapping.preset.insert({

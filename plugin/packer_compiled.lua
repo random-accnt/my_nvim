@@ -116,6 +116,11 @@ _G.packer_plugins = {
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["lsp-zero.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -132,7 +137,7 @@ _G.packer_plugins = {
     url = "https://github.com/tanvirtin/monokai.nvim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-cmdline", "cmp-buffer", "cmp-nvim-lsp", "cmp-path" },
+    after = { "cmp-buffer", "cmp-cmdline", "cmp-nvim-lsp", "cmp-path" },
     config = { "require('config.nvim-cmp')" },
     loaded = true,
     only_config = true,
@@ -148,6 +153,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   }
 }
 
@@ -158,10 +168,10 @@ require('config.nvim-cmp')
 time([[Config for nvim-cmp]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-buffer ]]
+vim.cmd [[ packadd cmp-cmdline ]]
 vim.cmd [[ packadd cmp-nvim-lsp ]]
 vim.cmd [[ packadd cmp-path ]]
-vim.cmd [[ packadd cmp-cmdline ]]
+vim.cmd [[ packadd cmp-buffer ]]
 time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false

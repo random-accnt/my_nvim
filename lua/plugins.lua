@@ -36,6 +36,21 @@ return require('packer').startup(function(use)
 	use 'tanvirtin/monokai.nvim'
 
 	-- completion
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v2.x',
+		requires = {
+			-- LSP Support
+			{'neovim/nvim-lspconfig'},             -- Required
+			{'williamboman/mason.nvim'},           -- Optional
+			{'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+			-- Autocompletion
+			{'hrsh7th/nvim-cmp'},     -- Required
+			{'hrsh7th/cmp-nvim-lsp'}, -- Required
+			{'L3MON4D3/LuaSnip'},     -- Required
+		}
+	}
 	use { 'williamboman/mason.nvim' }
 	use { 'williamboman/mason-lspconfig.nvim' }
 	use { 'neovim/nvim-lspconfig' }
@@ -46,6 +61,9 @@ return require('packer').startup(function(use)
 	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }       -- cmdline auto-completion
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
+
+	-- terminal
+	use { 'akinsho/toggleterm.nvim' }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
