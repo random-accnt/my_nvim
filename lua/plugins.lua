@@ -1,12 +1,12 @@
 local ensure_packer = function()
-		local fn = vim.fn
-		local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-		if fn.empty(fn.glob(install_path)) > 0 then
-				fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-				vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+	local fn = vim.fn
+	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+		vim.cmd [[packadd packer.nvim]]
+		return true
+	end
+	return false
 end
 local packer_bootstrap = ensure_packer()
 
@@ -25,12 +25,12 @@ vim.cmd([[
 -- Packer.nvim hints
 --     after = string or list,           -- Specifies plugins to load before this plugin. See "sequencing" below
 --     config = string or function,      -- Specifies code to run after this plugin is loaded
---     requires = string or list,        -- Specifies plugin dependencies. See "dependencies". 
+--     requires = string or list,        -- Specifies plugin dependencies. See "dependencies".
 --     ft = string or list,              -- Specifies filetypes which load this plugin.
 --     run = string, function, or table, -- Specify operations to be run after successful installs/updates of a plugin
 return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+	-- Packer can manage itself
+	use 'wbthomason/packer.nvim'
 
 	-- colorscheme
 	use 'tanvirtin/monokai.nvim'
@@ -41,14 +41,14 @@ return require('packer').startup(function(use)
 		branch = 'v2.x',
 		requires = {
 			-- LSP Support
-			{'neovim/nvim-lspconfig'},             -- Required
-			{'williamboman/mason.nvim'},           -- Optional
-			{'williamboman/mason-lspconfig.nvim'}, -- Optional
+			{ 'neovim/nvim-lspconfig' },    -- Required
+			{ 'williamboman/mason.nvim' },  -- Optional
+			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
 			-- Autocompletion
-			{'hrsh7th/nvim-cmp'},     -- Required
-			{'hrsh7th/cmp-nvim-lsp'}, -- Required
-			{'L3MON4D3/LuaSnip'},     -- Required
+			{ 'hrsh7th/nvim-cmp' }, -- Required
+			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
+			{ 'L3MON4D3/LuaSnip' }, -- Required
 		}
 	}
 	use { 'williamboman/mason.nvim' }
@@ -56,19 +56,58 @@ return require('packer').startup(function(use)
 	use { 'neovim/nvim-lspconfig' }
 	use { 'hrsh7th/nvim-cmp', config = [[require('config.nvim-cmp')]] }
 	use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
-	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }        -- buffer auto-completion
-	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }          -- path auto-completion
-	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }       -- cmdline auto-completion
-	use 'L3MON4D3/LuaSnip'
+	use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' } -- buffer auto-completion
+	use { 'hrsh7th/cmp-path', after = 'nvim-cmp' } -- path auto-completion
+	use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' } -- cmdline auto-completion
 	use 'saadparwaiz1/cmp_luasnip'
+	use { "rafamadriz/friendly-snippets" }
+
 
 	-- terminal
 	use { 'akinsho/toggleterm.nvim' }
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+	-- markdown
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function() vim.fn["mkdp#util#install"]() end,
+	})
+	use({
+		'jakewvincent/mkdnflow.nvim',
+		--- rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed (hererocks install fails)
+		config = function()
+			require("mkdnflow").setup({
+				mappings = {
+					MkdnEnter = { { 'i', 'n', 'v' }, '<CR>' },
+					MkdnTableNewRowBelow = { 'n', '<leader>ar' },
+					MkdnTableNewRowAbove = { 'n', '<leader>aR' },
+					MkdnTableNewColAfter = { 'n', '<leader>ac' },
+					MkdnTableNewColBefore = { 'n', '<leader>aC' },
+				},
+				links = {
+					transform_explicit = function(text)
+						text = text:gsub(" ", "-")
+						text = text:lower()
+						return (text)
+					end
+				}
+			})
+		end
+	})
+	use { 'ekickx/clipboard-image.nvim' }
 
+	-- other
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate'
+	}
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end
+	}
+
+	-- Automatically set up your configuration after cloning packer.nvim
+	-- Put this at the end after all plugins
+	if packer_bootstrap then
+		require('packer').sync()
+	end
+end)

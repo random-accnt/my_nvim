@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/jirka/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/jirka/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/jirka/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/jirka/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/jirka/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/jirka/.cache/nvim/packer_hererocks/2.1.1694285958/share/lua/5.1/?.lua;/home/jirka/.cache/nvim/packer_hererocks/2.1.1694285958/share/lua/5.1/?/init.lua;/home/jirka/.cache/nvim/packer_hererocks/2.1.1694285958/lib/luarocks/rocks-5.1/?.lua;/home/jirka/.cache/nvim/packer_hererocks/2.1.1694285958/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/jirka/.cache/nvim/packer_hererocks/2.1.1694285958/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -78,6 +78,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["clipboard-image.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/clipboard-image.nvim",
+    url = "https://github.com/ekickx/clipboard-image.nvim"
   },
   ["cmp-buffer"] = {
     after_files = { "/home/jirka/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
@@ -116,10 +121,20 @@ _G.packer_plugins = {
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -131,13 +146,25 @@ _G.packer_plugins = {
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["mkdnflow.nvim"] = {
+    config = { "\27LJ\2\nB\0\1\6\0\4\0\v\18\3\0\0009\1\0\0'\4\1\0'\5\2\0B\1\4\2\18\0\1\0\18\3\0\0009\1\3\0B\1\2\2\18\0\1\0L\0\2\0\nlower\6-\6 \tgsubå\2\1\0\6\0\21\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\15\0005\3\5\0005\4\4\0005\5\3\0>\5\1\4=\4\6\0035\4\a\0=\4\b\0035\4\t\0=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3=\3\16\0025\3\18\0003\4\17\0=\4\19\3=\3\20\2B\0\2\1K\0\1\0\nlinks\23transform_explicit\1\0\0\0\rmappings\1\0\0\26MkdnTableNewColBefore\1\3\0\0\6n\15<leader>aC\25MkdnTableNewColAfter\1\3\0\0\6n\15<leader>ac\25MkdnTableNewRowAbove\1\3\0\0\6n\15<leader>aR\25MkdnTableNewRowBelow\1\3\0\0\6n\15<leader>ar\14MkdnEnter\1\0\0\1\3\0\0\0\t<CR>\1\4\0\0\6i\6n\6v\nsetup\rmkdnflow\frequire\0" },
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/mkdnflow.nvim",
+    url = "https://github.com/jakewvincent/mkdnflow.nvim"
+  },
   ["monokai.nvim"] = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/monokai.nvim",
     url = "https://github.com/tanvirtin/monokai.nvim"
   },
+  ["nvim-autopairs"] = {
+    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp-cmdline", "cmp-nvim-lsp", "cmp-path" },
+    after = { "cmp-cmdline", "cmp-path", "cmp-buffer", "cmp-nvim-lsp" },
     config = { "require('config.nvim-cmp')" },
     loaded = true,
     only_config = true,
@@ -148,6 +175,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -162,16 +194,24 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: mkdnflow.nvim
+time([[Config for mkdnflow.nvim]], true)
+try_loadstring("\27LJ\2\nB\0\1\6\0\4\0\v\18\3\0\0009\1\0\0'\4\1\0'\5\2\0B\1\4\2\18\0\1\0\18\3\0\0009\1\3\0B\1\2\2\18\0\1\0L\0\2\0\nlower\6-\6 \tgsubå\2\1\0\6\0\21\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\15\0005\3\5\0005\4\4\0005\5\3\0>\5\1\4=\4\6\0035\4\a\0=\4\b\0035\4\t\0=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3=\3\16\0025\3\18\0003\4\17\0=\4\19\3=\3\20\2B\0\2\1K\0\1\0\nlinks\23transform_explicit\1\0\0\0\rmappings\1\0\0\26MkdnTableNewColBefore\1\3\0\0\6n\15<leader>aC\25MkdnTableNewColAfter\1\3\0\0\6n\15<leader>ac\25MkdnTableNewRowAbove\1\3\0\0\6n\15<leader>aR\25MkdnTableNewRowBelow\1\3\0\0\6n\15<leader>ar\14MkdnEnter\1\0\0\1\3\0\0\0\t<CR>\1\4\0\0\6i\6n\6v\nsetup\rmkdnflow\frequire\0", "config", "mkdnflow.nvim")
+time([[Config for mkdnflow.nvim]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require('config.nvim-cmp')
 time([[Config for nvim-cmp]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-cmdline ]]
-vim.cmd [[ packadd cmp-nvim-lsp ]]
-vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-buffer ]]
+vim.cmd [[ packadd cmp-cmdline ]]
+vim.cmd [[ packadd cmp-path ]]
+vim.cmd [[ packadd cmp-nvim-lsp ]]
 time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false

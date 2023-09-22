@@ -23,7 +23,7 @@ keymap.set('n', '<C-l>', '<C-w>l', opts)
 keymap.set('n', '<C-Up>', ':resize -2<CR>', opts)
 keymap.set('n', '<C-Down>', ':resize +2<CR>', opts)
 keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-keymap.set('n', '<C-Right>', ':vertical resize -2<CR>', opts)
+keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 
 -- Ctrl+w+h/j/k/l open window
 keymap.set('n', '<C-w><C-h>', ':lefta vs<CR>', opts)
@@ -64,3 +64,19 @@ end
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 
 keymap.set('n', '<leader>t', '<cmd>lua _toggle_floating()<CR>', opts)
+
+--
+-- CUSTOM
+--
+-- Printing missing chars
+function Missing_letter(text)
+	local pos = vim.api.nvim_win_get_cursor(0)[2] + 1
+	local line = vim.api.nvim_get_current_line()
+	local nline = line:sub(0, pos) .. text .. line:sub(pos + 1)
+	vim.api.nvim_set_current_line(nline)
+	-- TODO: how to right
+	vim.cmd(':normal l')
+end
+
+keymap.set('n', 'z', ':lua Missing_letter("y")<CR>', opts)
+keymap.set('n', 'Z', ':lua Missing_letter("Y")<CR>', opts)

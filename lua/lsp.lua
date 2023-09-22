@@ -47,6 +47,7 @@ lsp.format_on_save({
 		['gopls'] = { 'go' },
 		['pylsp'] = { 'python' },
 		['bashls'] = { 'bash' },
+		['clangd'] = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' }
 	}
 })
 
@@ -72,6 +73,11 @@ end
 if utils.executable('bashls') then
 	lspconfig.bashls.setup {
 	}
+end
+
+-- C++
+if utils.executable('clangd') then
+	lspconfig.clangd.setup {}
 end
 
 lsp.setup()
