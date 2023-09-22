@@ -1,7 +1,13 @@
 # My NeoVim config
-- unfinished
-- LSP added for:
-    - Lua
-    - Python
-    - Go
-    - Bash
+LSP added for:
+- Lua
+- Python
+- Go
+- Bash
+- C++
+
+## Custom keybindings
+- TODO
+
+## Features
+- TODO
