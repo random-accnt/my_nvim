@@ -12,7 +12,7 @@ require('mason').setup({
 require('mason-lspconfig').setup({
 	-- list of lsp servers
 	-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-	ensure_installed = { 'pylsp', 'gopls', 'lua_ls', 'bashls' }
+	ensure_installed = { 'pylsp', 'gopls', 'lua_ls', 'bashls', 'tsserver', 'cssls' }
 })
 
 local lspconfig = require('lspconfig')
@@ -47,7 +47,10 @@ lsp.format_on_save({
 		['gopls'] = { 'go' },
 		['pylsp'] = { 'python' },
 		['bashls'] = { 'bash' },
-		['clangd'] = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' }
+		['clangd'] = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+		['tsserver'] = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact",
+			"typescript.tsx" },
+		['cssls'] = { "css", "scss", "less" }
 	}
 })
 
@@ -78,6 +81,16 @@ end
 -- C++
 if utils.executable('clangd') then
 	lspconfig.clangd.setup {}
+end
+
+-- Typescript
+if utils.executable('tsserver') then
+	lspconfig.tsserver.setup {}
+end
+
+-- CSS
+if utils.executable('cssls') then
+	lspconfig.cssls.setup {}
 end
 
 lsp.setup()

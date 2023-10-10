@@ -31,6 +31,45 @@ keymap.set('n', '<C-w><C-j>', ':bel sp<CR>', opts)
 keymap.set('n', '<C-w><C-k>', ':to sp<CR>', opts)
 keymap.set('n', '<C-w><C-l>', ':rightb vs<CR>', opts)
 
+-- hop: reimplement some motion keys
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+
+keymap.set('', 'f',
+	function()
+		hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+	end, { remap = true })
+
+keymap.set('', 'F',
+	function()
+		hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+	end, { remap = true })
+
+-- debugging
+local dap = require("dap")
+keymap.set('n', '<F5>', dap.continue)
+keymap.set('n', '<F10>', dap.step_over)
+keymap.set('n', '<F11>', dap.step_into)
+keymap.set('n', '<F12>', dap.step_out)
+keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+
+keymap.set('', '<C-w>',
+	function()
+		hop.hint_words({ direction = directions.AFTER_CURSOR })
+	end, { remap = true }
+)
+
+-- telescope
+local builtin = require('telescope.builtin')
+local dropdown = require('telescope.themes').get_dropdown()
+
+keymap.set('n', '<leader>ff', function() builtin.find_files(dropdown) end, opts)
+keymap.set('n', '<leader>fg', builtin.live_grep, opts)
+keymap.set('n', '<leader>fb', builtin.buffers, opts)
+keymap.set('n', '<leader>fh', builtin.help_tags, opts)
+keymap.set('n', '<leader>fr', builtin.lsp_references, opts)
+keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, opts)
+
 --
 -- VISUAL M.
 --

@@ -62,6 +62,14 @@ return require('packer').startup(function(use)
 	use 'saadparwaiz1/cmp_luasnip'
 	use { "rafamadriz/friendly-snippets" }
 
+	-- telescope
+	use { 'nvim-telescope/telescope-fzf-native.nvim', run =
+	'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.3',
+		-- or                            , branch = '0.1.x',
+		requires = { { 'nvim-lua/plenary.nvim' } }
+	}
 
 	-- terminal
 	use { 'akinsho/toggleterm.nvim' }
@@ -95,6 +103,11 @@ return require('packer').startup(function(use)
 	})
 	use { 'ekickx/clipboard-image.nvim' }
 
+	-- debug
+	use { 'mfussenegger/nvim-dap' }
+	use { 'leoluz/nvim-dap-go' }
+	use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+
 	-- other
 	use {
 		'nvim-treesitter/nvim-treesitter',
@@ -104,6 +117,13 @@ return require('packer').startup(function(use)
 		"windwp/nvim-autopairs",
 		config = function() require("nvim-autopairs").setup {} end
 	}
+	use { 'elkowar/yuck.vim' }
+	use {
+		'smoka7/hop.nvim',
+		tag = '*', -- optional but strongly recommended
+	}
+	use { 'lervag/vimtex' }
+	use { 'https://gitlab.com/itaranto/plantuml.nvim', tag = '*' }
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -126,6 +126,11 @@ _G.packer_plugins = {
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["hop.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/hop.nvim",
+    url = "https://github.com/smoka7/hop.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -164,12 +169,27 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-cmdline", "cmp-path", "cmp-buffer", "cmp-nvim-lsp" },
+    after = { "cmp-buffer", "cmp-path", "cmp-cmdline", "cmp-nvim-lsp" },
     config = { "require('config.nvim-cmp')" },
     loaded = true,
     only_config = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-go"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-dap-go",
+    url = "https://github.com/leoluz/nvim-dap-go"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -186,14 +206,48 @@ _G.packer_plugins = {
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
+  ["plantuml.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/plantuml.nvim",
+    url = "https://gitlab.com/itaranto/plantuml.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
   ["toggleterm.nvim"] = {
     loaded = true,
     path = "/home/jirka/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
+  },
+  ["yuck.vim"] = {
+    loaded = true,
+    path = "/home/jirka/.local/share/nvim/site/pack/packer/start/yuck.vim",
+    url = "https://github.com/elkowar/yuck.vim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 -- Config for: mkdnflow.nvim
 time([[Config for mkdnflow.nvim]], true)
 try_loadstring("\27LJ\2\nB\0\1\6\0\4\0\v\18\3\0\0009\1\0\0'\4\1\0'\5\2\0B\1\4\2\18\0\1\0\18\3\0\0009\1\3\0B\1\2\2\18\0\1\0L\0\2\0\nlower\6-\6 \tgsubå\2\1\0\6\0\21\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\15\0005\3\5\0005\4\4\0005\5\3\0>\5\1\4=\4\6\0035\4\a\0=\4\b\0035\4\t\0=\4\n\0035\4\v\0=\4\f\0035\4\r\0=\4\14\3=\3\16\0025\3\18\0003\4\17\0=\4\19\3=\3\20\2B\0\2\1K\0\1\0\nlinks\23transform_explicit\1\0\0\0\rmappings\1\0\0\26MkdnTableNewColBefore\1\3\0\0\6n\15<leader>aC\25MkdnTableNewColAfter\1\3\0\0\6n\15<leader>ac\25MkdnTableNewRowAbove\1\3\0\0\6n\15<leader>aR\25MkdnTableNewRowBelow\1\3\0\0\6n\15<leader>ar\14MkdnEnter\1\0\0\1\3\0\0\0\t<CR>\1\4\0\0\6i\6n\6v\nsetup\rmkdnflow\frequire\0", "config", "mkdnflow.nvim")
@@ -202,16 +256,12 @@ time([[Config for mkdnflow.nvim]], false)
 time([[Config for nvim-cmp]], true)
 require('config.nvim-cmp')
 time([[Config for nvim-cmp]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-buffer ]]
 vim.cmd [[ packadd cmp-cmdline ]]
-vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-nvim-lsp ]]
+vim.cmd [[ packadd cmp-buffer ]]
+vim.cmd [[ packadd cmp-path ]]
 time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
