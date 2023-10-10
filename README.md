@@ -5,6 +5,7 @@ LSP added for:
 - Go
 - Bash
 - C++
+- JS
 
 ## Custom keybindings
 - TODO
