@@ -1,6 +1,8 @@
 {
     "diagnostics.globals": [
         "vim",
-        "protocol"
+        "protocol",
+        "opts",
+        "plugins"
     ]
 }

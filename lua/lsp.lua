@@ -1,40 +1,34 @@
-require('lsp-zero')
-require('mason').setup({
+require("lsp-zero")
+require("mason").setup({
 	ui = {
 		icons = {
 			package_installed = "✓",
 			package_pending = "➜",
-			package_uninstalled = "✗"
-		}
-	}
+			package_uninstalled = "✗",
+		},
+	},
 })
 
-require('mason-lspconfig').setup({
+require("mason-lspconfig").setup({
 	-- list of lsp servers
 	-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-	ensure_installed = { 'pylsp', 'gopls', 'lua_ls', 'bashls', 'tsserver', 'cssls' }
+	ensure_installed = { "pylsp", "gopls", "lua_ls", "bashls", "tsserver", "cssls", "yamlls", "marksman" },
 })
 
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
 
 local opts = { noremap = true }
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
-
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 
 -- LSP
-local utils = require('utils')
+local utils = require("utils")
 local fn = vim.fn
 
-local lsp = require('lsp-zero').preset({})
-lsp.on_attach(
-	function(client, bufnr)
-		-- :h lsp-zero-keybindings for info
-		lsp.default_keymaps({ buffer = bufnr })
-	end
-)
+local lsp = require("lsp-zero").preset({})
+lsp.on_attach(function(client, bufnr)
+	-- :h lsp-zero-keybindings for info
+	lsp.default_keymaps({ buffer = bufnr })
+end)
 
 -- formatting
 lsp.format_on_save({
@@ -43,54 +37,113 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		['lua_ls'] = { 'lua' },
-		['gopls'] = { 'go' },
-		['pylsp'] = { 'python' },
-		['bashls'] = { 'bash' },
-		['clangd'] = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
-		['tsserver'] = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact",
-			"typescript.tsx" },
-		['cssls'] = { "css", "scss", "less" }
-	}
+		["lua_ls"] = { "lua" },
+		["gopls"] = { "go" },
+		["pylsp"] = { "python" },
+		["bashls"] = { "bash" },
+		["clangd"] = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+		["tsserver"] = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+		},
+		["cssls"] = { "css", "scss", "less" },
+		["yamlls"] = { "yml", "yaml" },
+		["marksman"] = { "md" },
+	},
 })
 
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 -- Lua
-if utils.executable('lua-language-server') then
-	lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+if utils.executable("lua-language-server") then
+	lspconfig.lua_ls.setup({
+		capabilities = capabilities,
+		lsp.nvim_lua_ls(),
+	})
 end
 
 -- Python
-if utils.executable('pylsp') then
-	lspconfig.pylsp.setup {
-	}
+if utils.executable("pylsp") then
+	lspconfig.pylsp.setup({
+		capabilities = capabilities,
+		settings = {
+			pylsp = {
+				plugins = {
+					black = {
+						enabled = true,
+						preview = true,
+					},
+				},
+			},
+		},
+	})
 end
 
 -- Go
-if utils.executable('gopls') then
+if utils.executable("gopls") then
 	lspconfig.gopls.setup({
-		cmd = { 'gopls' },
+		capabilities = capabilities,
+		cmd = { "gopls" },
 	})
 end
 
 -- bash
-if utils.executable('bashls') then
-	lspconfig.bashls.setup {
-	}
+if utils.executable("bashls") then
+	lspconfig.bashls.setup({
+		capabilities = capabilities,
+	})
 end
 
 -- C++
-if utils.executable('clangd') then
-	lspconfig.clangd.setup {}
+if utils.executable("clangd") then
+	lspconfig.clangd.setup({
+		capabilities = capabilities,
+	})
 end
 
 -- Typescript
-if utils.executable('tsserver') then
-	lspconfig.tsserver.setup {}
+if utils.executable("tsserver") then
+	lspconfig.tsserver.setup({
+		capabilities = capabilities,
+	})
 end
 
 -- CSS
-if utils.executable('cssls') then
-	lspconfig.cssls.setup {}
+if utils.executable("cssls") then
+	lspconfig.cssls.setup({
+		capabilities = capabilities,
+	})
+end
+
+-- Markdown
+if utils.executable("marksman") then
+	lspconfig.marksman.setup({
+		capabilities = capabilities,
+	})
+end
+
+-- YAML
+if utils.executable("yamlls") then
+	lspconfig.yamlls.setup({
+		capabilities = capabilities,
+		settings = {
+			yaml = {
+				schemas = {
+					["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+				},
+			},
+			format = {
+				enable = true,
+			},
+			validate = true,
+			completion = true,
+		},
+	})
 end
 
 lsp.setup()
