@@ -79,6 +79,7 @@ wk.register({
 		h = { "<cmd>Telescope help_tags<cr>", "Find help" },
 		r = { "<cmd>Telescope lsp_references<cr>", "Find references" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Find symbol" },
+		n = { "<cmd>Telescope Telescope notify<cr>", "View notify history" },
 	},
 })
 
@@ -87,7 +88,7 @@ wk.register({
 		name = "Diagnostic",
 		n = { "<cmd>lua vim.diagnostic.goto_next() <cr>", "Next warning" },
 		N = { "<cmd>lua vim.diagnostic.goto_prev() <cr>", "Previous warning" },
-		d = { "<cmd>lua vim.diagnostic.open_float() <cr>", "Previous warning" },
+		d = { "<cmd>lua vim.diagnostic.open_float() <cr>", "Open diagnostic window" },
 	},
 })
 
@@ -134,10 +135,18 @@ wk.register({
 	},
 })
 
+-- Run snipper
+wk.register({
+	["<leader>r"] = {
+		name = "run",
+		["<F10>"] = { "<cmd>SnipRun<cr>", "Run current line" }
+	}
+})
+
 --
 -- INSERT M.
 --
-
+keymap.set("v", "<leader>r<F10>", "<cmd>lua require('sniprun').run('v')<cr>", opts)
 --
 -- CUSTOM
 --
@@ -153,21 +162,3 @@ end
 
 keymap.set("n", "z", ':lua Missing_letter("y")<CR>', opts)
 keymap.set("n", "Z", ':lua Missing_letter("Y")<CR>', opts)
-
--- use Tab to indent list
-vim.api.nvim_exec(
-	[[
-    autocmd Filetype markdown,text,gitcommit setlocal expandtab tabstop=4 softtabstop=4 shiftwidth=4
-    autocmd Filetype markdown,text,gitcommit inoremap <Tab> <C-R>=luaeval("InsertTabWrapper()")<CR>
-]],
-	false
-)
-
-function _G.InsertTabWrapper()
-	local col = vim.fn.col(".") - 1
-	if vim.fn.getline(".")[col]:match("^s*$") then
-		return vim.api.nvim_replace_termcodes("<Tab>", true, true, true)
-	else
-		return vim.api.nvim_replace_termcodes("<C-t>", true, true, true)
-	end
-end

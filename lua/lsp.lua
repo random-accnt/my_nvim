@@ -12,7 +12,7 @@ require("mason").setup({
 require("mason-lspconfig").setup({
 	-- list of lsp servers
 	-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-	ensure_installed = { "pylsp", "gopls", "lua_ls", "bashls", "tsserver", "cssls", "yamlls", "marksman" },
+	ensure_installed = { "pylsp", "gopls", "lua_ls", "bashls", "tsserver", "cssls", "yamlls", "marksman", "taplo" },
 })
 
 local lspconfig = require("lspconfig")
@@ -53,6 +53,7 @@ lsp.format_on_save({
 		["cssls"] = { "css", "scss", "less" },
 		["yamlls"] = { "yml", "yaml" },
 		["marksman"] = { "md" },
+		["taplo"] = { "toml" },
 	},
 })
 
@@ -143,6 +144,12 @@ if utils.executable("yamlls") then
 			validate = true,
 			completion = true,
 		},
+	})
+end
+
+if utils.executable("taplo") then
+	lspconfig.taplo.setup({
+		capabilities = capabilities,
 	})
 end
 
