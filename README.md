@@ -6,6 +6,10 @@ LSP added for:
 - Bash
 - C++
 - JS
+- Markdown
+- YAML
+- TOML
+- CSS
 
 ## Custom keybindings
 - TODO
