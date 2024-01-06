@@ -76,10 +76,12 @@ wk.register({
 		f = { "<cmd>lua  builtin.find_files(dropdown) <cr>", "Find file" },
 		g = { "<cmd>Telescope live_grep<cr>", "Grep" },
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
-		h = { "<cmd>Telescope help_tags<cr>", "Find help" },
+		H = { "<cmd>Telescope help_tags<cr>", "Find help" },
 		r = { "<cmd>Telescope lsp_references<cr>", "Find references" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Find symbol" },
 		n = { "<cmd>Telescope Telescope notify<cr>", "View notify history" },
+		h = { "<cmd>Telescope harpoon marks<cr>", "Open haroon marks menu" },
+		m = { "<cmd>Telescope macros<cr>", "Open macros menu" },
 	},
 })
 
@@ -91,6 +93,22 @@ wk.register({
 		d = { "<cmd>lua vim.diagnostic.open_float() <cr>", "Open diagnostic window" },
 	},
 })
+
+-- harpoon
+wk.register({
+	["<leader>h"] = {
+		name = "Harpoon",
+		h = { '<cmd>lua require("harpoon.ui").toggle_quick_menu() <cr>', "Open Harpoon menu" },
+		a = { '<cmd>lua require("harpoon.mark").add_file() <cr>', "Mark file" },
+	}
+})
+
+keymap.set("n", "ě", '<cmd>lua require("harpoon.ui").nav_next() <cr>', opts)
+keymap.set("n", "š", '<cmd>lua require("harpoon.ui").nav_prev() <cr>', opts)
+keymap.set("n", "<C-+>", '<cmd>lua require("harpoon.ui").nav_file(1) <cr>', opts)
+keymap.set("n", "<C-ě>", '<cmd>lua require("harpoon.ui").nav_file(2) <cr>', opts)
+keymap.set("n", "<C-š>", '<cmd>lua require("harpoon.ui").nav_file(3) <cr>', opts)
+keymap.set("n", "<C-č>", '<cmd>lua require("harpoon.ui").nav_file(4) <cr>', opts)
 
 -- other
 vim.keymap.set({ "n" }, "<C-K>", function()

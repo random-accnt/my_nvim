@@ -16,6 +16,29 @@ plugins = {
 	-- colorscheme
 	"tanvirtin/monokai.nvim",
 
+	-- UI stuff
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+			require("notify").setup()
+		end
+	},
+	{
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			-- your configuration comes here
+		},
+	},
+
 	-- completion
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -97,7 +120,8 @@ plugins = {
 	-- debug
 	{ "mfussenegger/nvim-dap" },
 	{ "leoluz/nvim-dap-go" },
-	{ "rcarriga/nvim-dap-ui",       requires = { "mfussenegger/nvim-dap" } },
+	{ "mfussenegger/nvim-dap-python" },
+	{ "rcarriga/nvim-dap-ui",        requires = { "mfussenegger/nvim-dap" } },
 
 	-- github
 	{
@@ -113,6 +137,29 @@ plugins = {
 			require("gh-actions").setup(opts)
 		end,
 	},
+	-- dev - other
+	{
+		"Zeioth/dooku.nvim",
+		event = "VeryLazy",
+		opts = {
+			project_root = { '.git', '.hg', '.svn', '.bzr', '_darcs', '_FOSSIL_', '.fslckout', 'main.', 'src'
+			},
+			doxygen_clone_cmd_post = " ",
+			on_bufwrite_generate = false,
+			auto_setup = false,
+		},
+	},
+
+	-- movement
+	{
+		'ThePrimeagen/harpoon',
+		branch = "harpoon2",
+		requires = { "nvim-lua/plenary.nvim" }
+	},
+	{
+		"smoka7/hop.nvim",
+		-- tag = '*', -- optional but strongly recommended
+	},
 
 	-- other
 	{
@@ -126,11 +173,6 @@ plugins = {
 		end,
 	},
 	{ "elkowar/yuck.vim" },
-	{
-		"smoka7/hop.nvim",
-		--tag = '*', -- optional but strongly recommended
-	},
-
 	{ "lervag/vimtex" },
 	{
 		"https://gitlab.com/itaranto/plantuml.nvim",
@@ -148,45 +190,16 @@ plugins = {
 		"stevearc/conform.nvim",
 		opts = {},
 	},
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
-	},
 	{ "tyru/open-browser.vim" },
 	{ "weirongxu/plantuml-previewer.vim" },
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
 		opts = {},
-		config = function(_, opts)
-			require("lsp_signature").setup(opts)
-		end,
+		--config = function(_, opts)
+		--	require("lsp_signature").setup(opts)
+		--end,
 	},
-	{
-		"gaoDean/autolist.nvim",
-		ft = {
-			"markdown",
-			"text",
-			"tex",
-			"plaintex",
-			"norg",
-		},
-		config = function()
-			require("autolist").setup()
-
-			vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>")
-		end,
-	},
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
 		"michaelb/sniprun",
 		branch = "master",
@@ -196,11 +209,22 @@ plugins = {
 		-- (instead of fetching a binary from the github release). Requires Rust >= 1.65
 	},
 	{
-		"rcarriga/nvim-notify",
-		config = function()
-			require("notify").setup()
-		end
-	}
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {}
+	},
+	{
+		"danymat/neogen",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = true,
+	},
+	{ "yamatsum/nvim-cursorline" },
+	{ "kkharji/sqlite.lua" },
+	{
+		"ecthelionvi/NeoComposer.nvim",
+		dependencies = { "kkharji/sqlite.lua" },
+		opts = {}
+	},
 }
 
 require("lazy").setup(plugins, opts)

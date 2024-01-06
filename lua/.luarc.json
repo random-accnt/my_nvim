@@ -3,6 +3,7 @@
         "vim",
         "protocol",
         "opts",
-        "plugins"
+        "plugins",
+        "_toggle_floating"
     ]
 }

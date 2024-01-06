@@ -12,7 +12,8 @@ require("mason").setup({
 require("mason-lspconfig").setup({
 	-- list of lsp servers
 	-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-	ensure_installed = { "pylsp", "gopls", "lua_ls", "bashls", "tsserver", "cssls", "yamlls", "marksman", "taplo" },
+	ensure_installed = { "pylsp", "gopls", "lua_ls", "bashls", "tsserver", "cssls", "yamlls", "marksman", "taplo",
+		"ocamllsp" },
 })
 
 local lspconfig = require("lspconfig")
@@ -54,11 +55,13 @@ lsp.format_on_save({
 		["yamlls"] = { "yml", "yaml" },
 		["marksman"] = { "md" },
 		["taplo"] = { "toml" },
+		["ocamllsp"] = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
 	},
 })
 
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 
 -- Lua
 if utils.executable("lua-language-server") then
@@ -70,19 +73,9 @@ end
 
 -- Python
 if utils.executable("pylsp") then
-	lspconfig.pylsp.setup({
+	lspconfig.pylsp.setup {
 		capabilities = capabilities,
-		settings = {
-			pylsp = {
-				plugins = {
-					black = {
-						enabled = true,
-						preview = true,
-					},
-				},
-			},
-		},
-	})
+	}
 end
 
 -- Go
@@ -150,6 +143,13 @@ end
 if utils.executable("taplo") then
 	lspconfig.taplo.setup({
 		capabilities = capabilities,
+	})
+end
+
+-- ocaml
+if utils.executable("ocamllsp") then
+	lspconfig.ocamllsp.setup({
+
 	})
 end
 

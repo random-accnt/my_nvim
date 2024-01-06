@@ -1,8 +1,11 @@
-require('dap-go').setup {
-
-}
-
 local dap, dapUI = require('dap'), require('dapui')
+
+-- go
+require('dap-go').setup {}
+
+-- python
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+
 -- open/close UI with debugger
 dap.listeners.after.event_initialized['dapui_config'] = function()
 	dapUI.open()
